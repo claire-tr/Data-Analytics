@@ -1,0 +1,57 @@
+
+# Name: Yunyun Chen
+# Email: yc555@georgetown.edu
+
+
+
+import json
+import requests
+
+def getEvent(url, key, city, state, topic, text) :
+	response = ''
+	params = {'country':'us', 'topic':topic, 'text':text, 'city':city, 'state':state, 'key':key, 'page':1000}
+	r = requests.get(url, params = params)
+#	print(r.url)
+	return r.text
+
+
+def main():
+	url = 'https://api.meetup.com/2/open_events'
+	key = '23767d3d3d304cb3ee1f68a5740'
+	city = ['washington', 'nyc','los angeles','boston','chicago','SanFrancisco','Seattle','Austin','Huston','Philadelphia','Miami','Atlanta','SanDiego']
+	state = ['DC', 'NY','CA','MA','IL','CA','WA','TX','TX','PA','FL','GA','CA']
+	topic = 'photo'
+	text = None
+	num = 0
+	for i in range(0,len(city)) : 
+		response = getEvent(url, key, city[i], state[i], topic, text)
+	#	print response
+		num = decode(response,num) #a gloabl counter
+		if(num>=1000) :
+			break
+
+def decode(response,num):
+	results = json.loads(response.encode('ascii','ignore').decode())['results']
+	#print results
+	#print len(results)
+	for i in range(0, len(results)):
+		event = results[i]
+		num += 1
+        print("Event #"+str(num))
+        print("Event name : "+event['name'])
+        print("Event ID : "+str(event['id']))
+        print("Event URL : "+event['event_url'])
+		try :
+			print("Event City : "+str(event['venue']['city']))
+		except KeyError :
+			print("Event City : Not Available")
+		try :
+			print("Event Group name : "+str(event['group']['name']))
+		except KeyError :
+			print("Event Group : Not Available")
+		print("Event Created Time : "+ str(event['created']))
+		if(num>=1000) :
+			break
+	return num
+
+main()
