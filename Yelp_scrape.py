@@ -1,4 +1,3 @@
-
 from bs4 import BeautifulSoup
 import requests
 import csv
@@ -30,7 +29,7 @@ def main() :
                 #print("Restaurant Address: "+ rest_address)
                 rest_zip = rest_address.replace(' ','')[-5:].encode('utf-8')#zip code of restaunts
                 if not rest_zip.isdigit():
-                    rest_zip='N/A'
+                    rest_zip = 'N/A'
                 #print("Restaurant Zip Code: "+ rest_zip)
                 try :
                     rest_price = rest.find('span',{'class':'business-attribute price-range'}).text.encode('utf-8')
@@ -45,7 +44,7 @@ def main() :
                 rest_info = [num,rest_name, rest_address,rest_zip,rest_price,rest_review_count,rest_rating] #store in a list
                 #print rest_info
                 f_csv.writerow(rest_info) #write the list into csv file
-                num+=1
+                num += 1
 
     return
 
