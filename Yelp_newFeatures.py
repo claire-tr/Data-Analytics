@@ -32,7 +32,7 @@ for c in range(0,25):
             row_max = max(row[1:])
             major_index = row.index(row_max) #major restaurants in a zip code area
             row.append(headers[major_index])
-            (total,count)=(0.0,0.0); # count for weighted average price in a zip code area
+            (total,count) = (0.0,0.0); # count for weighted average price in a zip code area
             for i in range(1,5):
                 total += row[i]*i
                 count += row[i]
@@ -43,7 +43,7 @@ for c in range(0,25):
             # start stats in a new zip code area
             zip = r[3]
             row =[zip,0,0,0,0]
-            row[len(r[4])] +=1
+            row[len(r[4])] += 1
             rating_total += float(r[6])
     
     with open('yelp_price_'+city[c]+'.csv','w') as f:
