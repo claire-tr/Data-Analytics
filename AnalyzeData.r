@@ -99,8 +99,6 @@ TotalMoving <- TotalMoving[,c(-5:-11,-20:-26,-34:-36,-41:-47)]
 ##yelp cleaning
 ###########################################################################################
 
-
-
 ##########################
 # moving new featrues clean
 ###########################
@@ -116,9 +114,6 @@ for (i in 1:nrow(new_features_test)){
   if(new_features_test$Higher.Degree.percentage[i]<0 | new_features_test$Higher.Degree.percentage[i]>1){
     new_features_test<-new_features_test[-i,]}}
 
-
-
-
 ###################### 
 #  yelp file clear
 ######################
@@ -132,9 +127,6 @@ for (i in 6:7){
 }
 # remvoe na in population and percapita income
 yelp_test <- yelp_test[!is.na(yelp_test$Zip.Code),]
-
-
-
 
 ###########################
 # yelp price clear
@@ -167,8 +159,6 @@ DataMerge1 <- merge(DataMerge1,NewFeature,by = c("Zip"))
 write.csv(DataMerge,file="DataMerge.csv")
 DataMerge<-read.csv(file.choose(),header=T)
 DataMerge <- DataMerge[,-1]
-
-
 
 ###############################################################################
 # Exploratory Analysis
@@ -218,12 +208,10 @@ describe(TotalMoving)
 # binning equal depth
 ED <- cut(DataMerge$Population,breaks = quantile(DataMerge$Population,prob = seq(0,1,1/4)))
 
-
 ##########################################################################################
 # Histograms and Correlations
 #
 ##########################################################################################
-
 
 ###############################
 ### HISTGRAPH
