@@ -40,7 +40,6 @@ def main() :
                     #print("Restaurant Price: 0")
                 rest_review_count = rest.find('span',{'class':'review-count rating-qualifier'}).text.encode('utf-8')
                 rest_review_count = rest_review_count.replace('\n','')[12:].split(' ')[0]
-
                 rest_info = [num,rest_name, rest_address,rest_zip,rest_price,rest_review_count,rest_rating] #store in a list
                 #print rest_info
                 f_csv.writerow(rest_info) #write the list into csv file
